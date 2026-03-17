@@ -16,24 +16,34 @@ Use this skill when the request is fundamentally about fields, crops, weather, s
 
 ```mermaid
 flowchart TD
-    Request[Farm request] --> Router[skills/my-farm-advisor/SKILL.md]
-    Router --> Admin[Admin]
-    Router --> Data[Data Sources]
-    Router --> EDA[EDA]
-    Router --> Field[Field Management]
-    Router --> Imagery[Imagery]
-    Router --> Soil[Soil]
-    Router --> Strategy[Strategy]
-    Router --> Weather[Weather]
-    Admin --> Guides[GUIDE.md or PLAYBOOK.md]
-    Data --> Guides
-    EDA --> Guides
-    Field --> Guides
-    Imagery --> Guides
-    Soil --> Guides
-    Strategy --> Guides
-    Weather --> Guides
-    Guides --> Outputs[Field actions, reports, maps, analysis, rebuild steps]
+    accTitle: Farm Skill Routing Overview
+    accDescr: Overview of how the My Farm Advisor umbrella skill routes a farm request into the right operational area and then into guides or playbooks that produce field-ready outputs.
+
+    request([🌾 Farm request]) --> router[🧭 Umbrella skill router]
+
+    subgraph routing_areas ["📚 Farm workflow areas"]
+        direction TB
+        admin[Admin]
+        data_sources[Data sources]
+        eda[EDA]
+        field_management[Field management]
+        imagery[Imagery]
+        soil[Soil]
+        strategy[Strategy]
+        weather[Weather]
+    end
+
+    router --> routing_areas
+    routing_areas --> guides[[🗂️ Guide or playbook]]
+    guides --> outputs([✅ Field actions, reports, maps, and rebuild steps])
+
+    classDef primary fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef support fill:#ecfccb,stroke:#65a30d,stroke-width:2px,color:#365314
+    classDef outcome fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+
+    class request,router primary
+    class guides support
+    class outputs outcome
 ```
 
 The umbrella entrypoint is [`SKILL.md`](SKILL.md). From there, the skill routes into one of the subtree indexes, and then into the actual guide or playbook that does the work.
@@ -55,12 +65,23 @@ The umbrella entrypoint is [`SKILL.md`](SKILL.md). From there, the skill routes 
 
 ```mermaid
 flowchart LR
-    A[Question or task] --> B[Pick the farm area]
-    B --> C[Open subtree index]
-    C --> D[Use GUIDE.md or PLAYBOOK.md]
-    D --> E[Run analysis or rebuild]
-    E --> F[Produce field-level output]
-    F --> G[Share recommendation, report, or artifact]
+    accTitle: Farm Workflow Progression
+    accDescr: Typical progression from a farm question through area selection, guide selection, execution, and delivery of a field-level output.
+
+    intake([🌱 Start with the question]) --> choose_area{Choose the right farm area}
+    choose_area --> open_index[📂 Open subtree index]
+    open_index --> select_guide[🗂️ Use guide or playbook]
+    select_guide --> run_workflow[⚙️ Run analysis or rebuild]
+    run_workflow --> produce_output[📦 Produce field-level output]
+    produce_output --> share_result([📣 Share recommendation or artifact])
+
+    classDef primary fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef process fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
+    classDef outcome fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    class intake,choose_area primary
+    class open_index,select_guide,run_workflow,produce_output process
+    class share_result outcome
 ```
 
 Examples:
@@ -74,11 +95,21 @@ Examples:
 
 ```mermaid
 flowchart TD
-    Upstream[Upstream OpenClaw runtime] --> FarmSkill[My Farm Advisor skill layer]
-    FarmSkill --> Ops[Field operations outputs]
-    FarmSkill --> DataLineage[Traceable data lineage]
-    FarmSkill --> Reports[Farm reports and dashboards]
-    FarmSkill --> StrategyOutputs[Crop and maturity strategy]
+    accTitle: Farm Skill Value In The Repo
+    accDescr: Diagram showing how the upstream OpenClaw runtime connects to the My Farm Advisor skill layer and how that layer produces operational farm outputs, lineage, reporting, and strategy support.
+
+    upstream([⚙️ Upstream OpenClaw runtime]) --> farm_skill[🌾 My Farm Advisor skill layer]
+
+    farm_skill --> field_outputs[🚜 Field operations outputs]
+    farm_skill --> lineage[🧬 Traceable data lineage]
+    farm_skill --> reporting[📊 Farm reports and dashboards]
+    farm_skill --> strategy_outputs[📈 Crop and maturity strategy]
+
+    classDef primary fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef outcome fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    class upstream,farm_skill primary
+    class field_outputs,lineage,reporting,strategy_outputs outcome
 ```
 
 This skill is the main farm-specific intelligence layer. The rest of the repository gives you runtime, channels, gateway behavior, and deployment. This skill tells the system how to think and work like a farm advisor.
