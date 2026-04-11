@@ -49,6 +49,7 @@ services:
       WORKSPACE_DATA_R2_PREFIX: ${WORKSPACE_DATA_R2_PREFIX:-workspace/data}
     volumes:
       - ${DATA_VOLUME_SOURCE:-./data}:/data
+      - /home/karlt/orchard-dashboard/data:/data/dashboard
       ## Uncomment the lines below to enable sandbox isolation
       ## (agents.defaults.sandbox). Requires Docker CLI in the image
       ## (build with --build-arg OPENCLAW_INSTALL_DOCKER_CLI=1) or use
