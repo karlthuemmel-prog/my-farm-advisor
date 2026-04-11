@@ -10,13 +10,14 @@ This project uses 1000+ skills across multiple repositories. To ensure optimal a
 
 **These skills are invoked by default for almost every task:**
 
-1. **superior-byte-works-wrighter** ⭐ HIGHEST PRIORITY
+1. **my-orchard-advisor** — orchard-specific questions (phenology, pest/disease, harvest maturity, block management, thinning) ⭐ PRIMARY PROJECT SKILL
+
+2. **superior-byte-works-wrighter**
    - Used most frequently ("almost always writer gets used")
    - Core writing and documentation skill
 
-2. **my-farm-advisor** ⭐ PRIMARY PROJECT SKILL
-   - Key skill for the class being taught
-   - Secondary primary after wrighter
+3. **my-farm-advisor** ⭐ SECONDARY PROJECT SKILL
+   - field operations, soil, weather, imagery, data pipeline
 
 ### Tier 2: USE SECONDARY (Primary Project Skills)
 
