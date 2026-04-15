@@ -45,6 +45,36 @@ fi
 
 log_storage_mode
 
+# Configure rclone with R2 credentials whenever they are present.
+# Writes ~/.config/rclone/rclone.conf so all rclone commands (sync, copy, ls,
+# etc.) work without needing --config flags, regardless of whether the FUSE
+# mount is enabled.
+if [ -n "$R2_ACCESS_KEY_ID" ] && [ -n "$R2_SECRET_ACCESS_KEY" ] && [ -n "$R2_ENDPOINT" ]; then
+    # Write rclone config to a shared system path so it is readable by both
+    # root (entrypoint process) and the node user (docker exec sessions).
+    mkdir -p /etc/rclone
+    cat > /etc/rclone/rclone.conf <<EOF
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = ${R2_ACCESS_KEY_ID}
+secret_access_key = ${R2_SECRET_ACCESS_KEY}
+endpoint = ${R2_ENDPOINT}
+region = auto
+acl = private
+EOF
+    chmod 644 /etc/rclone/rclone.conf
+    # Symlink into every user's expected config location so rclone finds it
+    # without needing --config or RCLONE_CONFIG set in each session.
+    for home_dir in /root /home/node; do
+        mkdir -p "${home_dir}/.config/rclone"
+        ln -sf /etc/rclone/rclone.conf "${home_dir}/.config/rclone/rclone.conf"
+    done
+    echo "rclone: r2 remote configured (endpoint: ${R2_ENDPOINT})"
+else
+    echo "rclone: R2 credentials not set — skipping rclone config"
+fi
+
 mkdir -p /data
 
 if is_truthy "$OPENCLAW_BOOTSTRAP_REFRESH"; then

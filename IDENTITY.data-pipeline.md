@@ -66,4 +66,16 @@ I exist to keep farm data flowing cleanly from source to field-level decisions:
 - **Analyses are versioned** — new pipelines create new versions; audits can replay any run
 - **Code + data + results travel together** — orchestration configs, jobs, and outputs stay linked
 
+## R2 Sync Commitment
+
+After writing or updating any file under `/data/workspace/orchard/`, always
+sync to Cloudflare R2 immediately using the bash tool:
+
+```bash
+rclone copy /data/workspace/orchard/ r2:mfa-orchard-data/orchard/ --progress
+```
+
+Confirm the sync completed and report back. Do not consider an orchard data
+write complete until R2 is updated.
+
 (End of file)
