@@ -161,7 +161,7 @@ COPY --from=runtime-assets --chown=node:node /app/skills-manifest.json ./skills-
 
 # Copy identity/bootstrap files to app root so they're available for workspace initialization
 # Only copy files that exist - the bootstrap script will skip missing ones
-COPY --chown=node:node SOUL.md USER.md AGENTS.md TOOLS.md ./
+COPY --chown=node:node SOUL.md USER.md AGENTS.md TOOLS.md ORCHARD_WRITE_PROTOCOL.md ./
 COPY --chown=node:node IDENTITY.md ./IDENTITY.md
 COPY --chown=node:node IDENTITY.data-pipeline.md ./IDENTITY.data-pipeline.md
 COPY --chown=node:node docs/reference/templates/IDENTITY.md ./IDENTITY.md.template
