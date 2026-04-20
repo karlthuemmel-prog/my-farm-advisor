@@ -894,20 +894,8 @@ fi
 
 echo "Starting gateway..."
 
-# Auto-sync /data/dashboard/ to R2 every 30 seconds so the public dashboard
-# stays current without requiring the agent to run rclone manually.
-DASHBOARD_R2_SYNC_INTERVAL="${DASHBOARD_R2_SYNC_INTERVAL:-30}"
-if [ -n "$R2_BUCKET_NAME" ] && [ -n "$R2_ACCESS_KEY_ID" ] && [ -n "$R2_SECRET_ACCESS_KEY" ] && [ -d "/data/dashboard" ]; then
-    (
-        while true; do
-            sleep "$DASHBOARD_R2_SYNC_INTERVAL"
-            rclone sync /data/dashboard/ "r2:${R2_BUCKET_NAME}/data/" --transfers=2 --quiet 2>/tmp/rclone-dashboard-sync.log || true
-        done
-    ) &
-    echo "dashboard-sync: background R2 sync started (interval: ${DASHBOARD_R2_SYNC_INTERVAL}s -> r2:${R2_BUCKET_NAME}/data/)"
-else
-    echo "dashboard-sync: skipped (R2 credentials or /data/dashboard not available)"
-fi
+# Dashboard log writes go through the API (POST https://orchard.insightacre.com/api/log).
+# See ORCHARD_WRITE_PROTOCOL.md. No rclone sync needed.
 
 GATEWAY_BIND="${OPENCLAW_GATEWAY_BIND:-lan}"
 exec node dist/index.js gateway --bind "$GATEWAY_BIND" --port 18789 --allow-unconfigured
