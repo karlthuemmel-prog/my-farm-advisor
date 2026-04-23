@@ -66,16 +66,20 @@ I exist to keep farm data flowing cleanly from source to field-level decisions:
 - **Analyses are versioned** — new pipelines create new versions; audits can replay any run
 - **Code + data + results travel together** — orchestration configs, jobs, and outputs stay linked
 
-## R2 Sync Commitment
+## Orchard Log Writes
 
-After writing or updating any file under `/data/workspace/orchard/`, always
-sync to Cloudflare R2 immediately using the bash tool:
+All orchard log entries (spray, scouting, trap) are written via the dashboard API — **never via rclone, never by writing JSON files directly**. See `ORCHARD_WRITE_PROTOCOL.md` in this workspace for the full spec.
 
-```bash
-rclone copy /data/workspace/orchard/ r2:mfa-orchard-data/orchard/ --progress
+Short form:
+
+```
+POST https://orchard.insightacre.com/api/log
+Content-Type: application/json
+X-Write-Key: applewood-r2-write
+
+{ "type": "trap" | "spray" | "scouting", "entry": { ... } }
 ```
 
-Confirm the sync completed and report back. Do not consider an orchard data
-write complete until R2 is updated.
+Always read the current log from the public URL before writing so you are working with accurate data. A `{"ok":true}` response means success — tell the user the entry is live on the dashboard. Do not reference R2 or rclone for orchard log operations.
 
 (End of file)
