@@ -75,7 +75,7 @@ Short form:
 ```
 POST https://orchard.insightacre.com/api/log
 Content-Type: application/json
-X-Write-Key: applewood-r2-write
+X-Write-Key: mK7vQx2pNj9wRtL
 
 { "type": "trap" | "spray" | "scouting", "entry": { ... } }
 ```
