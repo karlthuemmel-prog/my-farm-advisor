@@ -1,0 +1,13 @@
+# VPS override for docker-compose.yml
+# Usage: docker compose -f docker-compose.yml -f docker-compose.vps.yml up -d
+#
+# Differences from local setup:
+#   - Data stored at /opt/mfa/data (bind mount, not ./data)
+#   - Dashboard volume mount removed (dashboard is on Cloudflare, not local)
+
+services:
+  openclaw-gateway:
+    volumes:
+      - /opt/mfa/data:/data
+      # local: - ${DATA_VOLUME_SOURCE:-./data}:/data
+      # local: - /home/karlt/orchard-dashboard/data:/data/dashboard  ← removed
