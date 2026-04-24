@@ -4,7 +4,15 @@ All orchard log entries are written via the dashboard API. **Do not write JSON f
 
 ## Read Current State First
 
-Before writing or modifying a log, always fetch the current contents so you are working with accurate data. These endpoints require a session cookie — use Karl's authenticated session, or read the current state from the scouting notes endpoint:
+Before writing or modifying a log, always fetch the current contents so you are working with accurate data. Use the write key header for bot access:
+
+```bash
+curl -s https://data.insightacre.com/data/applewood-estate/logs/spray-log.json \
+  -H "X-Write-Key: mK7vQx2pNj9wRtL"
+
+curl -s https://data.insightacre.com/data/applewood-estate/logs/scouting-notes.json \
+  -H "X-Write-Key: mK7vQx2pNj9wRtL"
+```
 
 - Spray log: `https://data.insightacre.com/data/applewood-estate/logs/spray-log.json`
 - Scouting log: `https://data.insightacre.com/data/applewood-estate/logs/scouting-notes.json`
