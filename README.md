@@ -148,13 +148,14 @@ docker compose up -d
 
 ## Skills Included
 
-| Skill                                                                                                                       | Purpose                                                              |
-| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [`skills/my-farm-advisor/`](skills/my-farm-advisor/README.md)                                                               | Core farm intelligence — field ops, imagery, soil, weather, strategy |
-| [`skills/my-farm-breeding-trial-management/`](skills/my-farm-breeding-trial-management/README.md)                           | Breeding trial workflows                                             |
-| [`skills/my-farm-qtl-analysis/`](skills/my-farm-qtl-analysis/README.md)                                                     | QTL analysis and genetics                                            |
-| [`skills/superior-byte-works-google-timesfm-forecasting/`](skills/superior-byte-works-google-timesfm-forecasting/README.md) | Time series forecasting                                              |
-| [`skills/superior-byte-works-wrighter/`](skills/superior-byte-works-wrighter/README.md)                                     | Structured writing, reports, documentation                           |
+| Skill                                                                                                                       | Purpose                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`skills/my-orchard-advisor/`](skills/my-orchard-advisor/)                                                                  | Orchard intelligence — apple scab, codling moth, fire blight, phenology, bloom timing, chill hours, harvest maturity, spray program strategy, block management |
+| [`skills/my-farm-advisor/`](skills/my-farm-advisor/README.md)                                                               | Broadacre farm intelligence — field ops, imagery, soil, weather, strategy                                                                                      |
+| [`skills/my-farm-breeding-trial-management/`](skills/my-farm-breeding-trial-management/README.md)                           | Breeding trial workflows                                                                                                                                       |
+| [`skills/my-farm-qtl-analysis/`](skills/my-farm-qtl-analysis/README.md)                                                     | QTL analysis and genetics                                                                                                                                      |
+| [`skills/superior-byte-works-google-timesfm-forecasting/`](skills/superior-byte-works-google-timesfm-forecasting/README.md) | Time series forecasting                                                                                                                                        |
+| [`skills/superior-byte-works-wrighter/`](skills/superior-byte-works-wrighter/README.md)                                     | Structured writing, reports, documentation                                                                                                                     |
 
 ---
 
