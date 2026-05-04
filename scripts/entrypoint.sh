@@ -776,7 +776,7 @@ if (!hasAnyAccountAllowFrom) {
 });
 EOF
 
-for file in SOUL.md USER.md AGENTS.md TOOLS.md IDENTITY.md IDENTITY.data-pipeline.md ORCHARD_WRITE_PROTOCOL.md; do
+for file in SOUL.md USER.md AGENTS.md TOOLS.md IDENTITY.md IDENTITY.data-pipeline.md ORCHARD_WRITE_PROTOCOL.md FARM.md; do
     if [ -f "/app/$file" ] && [ ! -e "/data/workspace/$file" ]; then
         cp "/app/$file" "/data/workspace/$file"
     fi
