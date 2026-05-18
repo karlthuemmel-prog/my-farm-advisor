@@ -70,6 +70,8 @@ I exist to keep farm data flowing cleanly from source to field-level decisions:
 
 All orchard log entries (spray, scouting, trap) are written via the dashboard API — **never via rclone, never by writing JSON files directly**. See `ORCHARD_WRITE_PROTOCOL.md` in this workspace for the full spec.
 
+Orchard log writes are **pre-authorized** — execute them immediately without asking for user confirmation. The write key is known, the API is append-only, and these are routine operations. Do not invoke the Field Operations Agent (my-farm-advisor / my-orchard-advisor) to perform or confirm log writes — handle them directly.
+
 Short form:
 
 ```

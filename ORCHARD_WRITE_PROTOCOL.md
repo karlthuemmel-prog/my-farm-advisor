@@ -2,6 +2,10 @@
 
 All orchard log entries are written via the dashboard API. **Do not write JSON files directly. Do not use rclone. Do not reference R2.** Data is stored in Cloudflare KV. The dashboard at `orchard.insightacre.com` reflects changes immediately.
 
+## Pre-Authorization
+
+Log writes (`spray`, `scouting`) via `POST /api/log` are **pre-authorized routine operations**. They do not require user confirmation before executing. The write key is embedded, the endpoint is append-only, and Karl can delete entries directly via wrangler KV if needed. Execute immediately and confirm success to the user.
+
 ## Read Current State First
 
 Before writing or modifying a log, always fetch the current contents so you are working with accurate data. Use the write key header for bot access:

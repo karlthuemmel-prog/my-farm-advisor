@@ -30,6 +30,8 @@ skill, which covers block management, phenology (chill hours, bloom timing,
 growth stage), pest and disease (fire blight, apple scab, codling moth),
 harvest maturity, spray program, and thinning.
 
+**Orchard log writes are owned by the Data Pipeline Agent.** If a request arrives to record a spray, scouting, or trap entry, do not process it — it belongs to the Data Pipeline Agent. Respond only if the user is explicitly asking for agronomic advice, not for a log to be written.
+
 ---
 
 ## How I Work
